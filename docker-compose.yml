@@ -1,0 +1,20 @@
+services:
+
+  meals:
+    container_name: meals
+    platform: linux/amd64
+    build: ./docker/images/flutter
+    volumes:
+      - ./projects/meals:/meals
+    working_dir: /meals
+    tty: true
+    ports:
+      - 80:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - meals-network
+
+networks:
+  meals-network:
+    driver: bridge
